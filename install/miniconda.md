@@ -7,7 +7,7 @@ OU : <br/>
 
 ## 2. Dans le terminal, exécuter :
 ```bash Miniconda3-latest-Linux-x86_64.sh <br/>
-cd Téléchargements/ <br/>
+cd Téléchargements/
 bash Miniconda3-py38_4.11.0-Linux-x86_64.sh``` 
 
 ## 3. Faire les configurations nécessaires puis, pour que les changements prennent effet, fermer et rouvrir le terminal
