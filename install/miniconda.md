@@ -18,3 +18,6 @@ conda activate stage
 
 ## 5. Installation des packages jupyterlab, pandas et altair
 conda install -c conda-forge jupyterlab pandas altair
+
+```sudo apt update
+sudo apt install apt-transport-https```
