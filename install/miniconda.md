@@ -1,0 +1,2 @@
+# Guide d'installation miniconda
+
