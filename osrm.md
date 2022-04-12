@@ -21,7 +21,7 @@ On vérifie que le Docker tourne <br/>
 ```cd data``` <br/>
 ```mkdir test``` <br/>
 ```cd test``` <br/>
-Téléchargement d'un extrait du réseau OSM : le réseau des Hautes-Pyrénées
+Téléchargement d'un extrait du réseau OSM : le réseau des Hautes-Pyrénées <br/>
 ```sudo wget https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/hautes_pyrenees.osm.pbf``` <br/>
 ```sudo docker run -t -v "${PWD}:/data" osrm/osrm-backend osrm-extract -p /opt/car.lua /data/hautes_pyrenees-latest.osm.pbf``` <br/>
 ```sudo docker run -t -v "${PWD}:/data" osrm/osrm-backend osrm-partition /data/hautes_pyrenees-latest.osrm``` <br/>
