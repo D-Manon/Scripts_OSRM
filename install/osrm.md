@@ -41,12 +41,20 @@ Téléchargement d'un extrait du réseau OSM : le réseau des Hautes-Pyrénées 
 sudo wget https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/hautes_pyrenees.osm.pbf
 
 sudo docker run -t -v "${PWD}:/data" osrm/osrm-backend osrm-extract -p /opt/car.lua /data/hautes_pyrenees-latest.osm.pbf
-
+```
+Lancement avec l'algorithme MLD <br/>
+```
 sudo docker run -t -v "${PWD}:/data" osrm/osrm-backend osrm-partition /data/hautes_pyrenees-latest.osrm
 
 sudo docker run -t -v "${PWD}:/data" osrm/osrm-backend osrm-customize /data/hautes_pyrenees-latest.osrm
 
 sudo docker run -t -i -p 5000:5000 -v "${PWD}:/data" osrm/osrm-backend osrm-routed --algorithm mld /data/hautes_pyrenees-latest.osrm
+```
+Lancement avec l'algorithme CH <br/>
+```
+sudo docker run -t -v "${PWD}:/data" osrm/osrm-backend osrm-contract /data/hautes_pyrenees-latest.osrm
+
+sudo docker run -t -i -p 5000:5000 -v "${PWD}:/data" osrm/osrm-backend osrm-routed /data/hautes_pyrenees-latest.osrm
 ```
 
 ## 3. Installation du backend d'OSRM sans Docker
@@ -90,15 +98,20 @@ sudo wget https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees
 cd /srv/osrm/osrm-backend/
 
 osrm-extract hautes_pyrenees-latest.osm.pbf --threads=10
-
+```
+Lancement avec l'algorithme MLD <br/>
+```
 osrm-partition hautes_pyrenees-latest.osrm
 
 osrm-customize hautes_pyrenees-latest.osrm
-```
 
-Lancer OSRM
-```
 osrm-routed --algorithm=MLD hautes_pyrenees-latest.osrm
+```
+Lancement avec l'algorithme CH <br/>
+```
+osrm-contract hautes_pyrenees-latest.osrm
+
+osrm-routed hautes_pyrenees-latest.osrm
 ```
 
 ## 4. Installation du frontend d'OSRM en utilisant Docker
