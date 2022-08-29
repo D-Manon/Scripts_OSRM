@@ -39,6 +39,12 @@ Le dossier comprend aussi les éléments suivants :
 ## 2 - Construction du calculateur d’itinéraires avec OSRM (2_Construst_OSRM)
 Lancer la commande `python3 /home/manon/Documents/Scripts/2_Construct_OSRM/Construction_OSRM_AZ.py`
 
+
+Il faudra créer ces dossier : 
+- assets/ : dossier stockant les données en entrée *env_geo_updated.gpkg* et le fichier pbf initial (téléchargé dans le script si non présent)
+- results/ : dossier stockant les fichier obtenus en sortie  
+
+
 Le dossier comprend les éléments suivants :
 - **Construction_OSRM_AZ.py** : script principal lançant des instructions dans l’invite de commandes ainsi que des fonctions contenues dans des scripts python présents dans le dossier src.
 - src/ : scripts appelés et lancés par le script principal, numérotés de 1 à 3
@@ -52,9 +58,7 @@ Le dossier comprend les éléments suivants :
     + En entrée : le fichier pbf modifié (stocké dans results), le profil lua (car_updated1 dans notre cas, stocké dans assets mais en réalité dans le dossier dédié à OSRM créé lors de son installation)
     + En sortie : tous les fichiers nécessaires au lancement du serveur OSRM. Ils sont stockés dans le dossier results
 
-Il faudra créer ces dossier : 
-- assets/ : dossier stockant les données en entrée *env_geo_updated.gpkg* et le fichier pbf initial (téléchargé dans le script si non présent)
-- results/ : dossier stockant les fichier obtenus en sortie  
+
 
 
 
