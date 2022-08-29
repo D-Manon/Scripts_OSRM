@@ -26,7 +26,7 @@ Voir aussi data/environnement/
 Trois étapes successives : 
 1) Jointure de la population INSEE, des aires d’attraction INSEE, des géométries des communes → Lancer **S1_Prepa_data_com.ipynb**
 2) Intersection du fichier gpkg obtenu avec le CLC : **étape à réaliser sur QGIS ou ArcGIS**
-wget [ftp://Corine_Land_Cover_ext:ishiteimapie9ahP@ftp3.ign.fr/ftp://Corine_Land_Cover_ext:ishiteimapie9ahP@ftp3.ign.fr/CLC18_SHP__FRA_2019-08-21.7z]
+[Données : `wget ftp://Corine_Land_Cover_ext:ishiteimapie9ahP@ftp3.ign.fr/ftp://Corine_Land_Cover_ext:ishiteimapie9ahP@ftp3.ign.fr/CLC18_SHP__FRA_2019-08-21.7z`]
 3) Attribution d’un type d’environnement urbain à chaque morceau de commune (un morceau de commune = intersection CLC et de la commune) → Lancer **S2_Dep_urban_env.py** `python3 /home/manon/Documents/Scripts/1_Prepare_urban_environments/ S2_Dep_urban_env.py`
 
 En sortie : *env_geo_updated.gpkg* → fichier vectoriel contenant les environnements urbains à l’échelle de la France entière
