@@ -55,7 +55,7 @@ Le dossier comprend les éléments suivants :
           En entrée : le fichier pbf à modifier (stocké dans assets/)
           En sortie : le fichier pbf modifié (stocké dans results/)
   + **S3_Construction_OSRM.py** : le réseau est construit à partir des données OSM précédemment modifiées et selon l’algorithme spécifié (MLD ou CH)
-    + En entrée : le fichier pbf modifié (stocké dans results), le profil lua (car_updated1 dans notre cas, stocké dans assets mais en réalité dans le dossier dédié à OSRM créé lors de son installation)
+    + En entrée : le fichier pbf modifié (stocké dans results), le profil lua (car_updated1 dans notre cas, stocké ici à la racine, mais en réalité dans le dossier dédié à OSRM créé lors de son installation)
     + En sortie : tous les fichiers nécessaires au lancement du serveur OSRM. Ils sont stockés dans le dossier results
 
 
