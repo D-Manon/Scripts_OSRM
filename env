@@ -1,0 +1,31 @@
+# OPTIONS
+env_geo = 'env_geo_updated_v1'
+network = 'hautes_pyrenees-latest' # 'france_metro_dom_com_nc-latest'
+url_network = http://download.openstreetmap.fr/extracts/merge/${network}.osm.pbf # changer l'url si autre réseau
+profile = 'car_updated1'
+algorithm = 'mld' # autre option : ch
+
+# CONNEXION POSTGRES
+db_superuser = 'postgres'
+db_superpassword = 'password'
+db_superdb = 'postgres'
+db_user = 'manon'
+db_host = 'localhost'
+db_port = '5432'
+db_name = 'bdd_hp'
+db_password = 'password'
+
+# PATHS
+pth_main_folder = '/home/manon/Documents/Scripts_OSRM/2_Construct_OSRM/'
+pth_scripts = ${pth_main_folder}src/
+pth_folder_data = ${pth_main_folder}assets/
+pth_folder_results = ${pth_main_folder}results/
+pth_results_network = ${pth_folder_results}${network}/${profile}/${algorithm}/
+
+pth_folder_osmosis='/home/manon/osmosis/'
+pth_osmosis_scripts = ${pth_folder_osmosis}script/
+pth_osmosis = ${pth_folder_osmosis}bin/osmosis
+
+pth_folder_osrm = '/srv/osrm/'
+pth_osrm_build = ${pth_folder_osrm}build/
+pth_osrm_profiles = ${pth_folder_osrm}osrm-backend/profiles/
