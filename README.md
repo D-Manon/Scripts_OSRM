@@ -27,7 +27,7 @@ Trois étapes successives :
 1) Jointure de la population INSEE, des aires d’attraction INSEE, des géométries des communes → Lancer **S1_Prepa_data_com.ipynb**
 2) Intersection du fichier gpkg obtenu avec le CLC : **étape à réaliser sur QGIS ou ArcGIS**
 [Données : `wget ftp://Corine_Land_Cover_ext:ishiteimapie9ahP@ftp3.ign.fr/ftp://Corine_Land_Cover_ext:ishiteimapie9ahP@ftp3.ign.fr/CLC18_SHP__FRA_2019-08-21.7z`]
-3) Attribution d’un type d’environnement urbain à chaque morceau de commune (un morceau de commune = intersection CLC et de la commune) → Lancer **S2_Dep_urban_env.py** `python3 /home/manon/Documents/Scripts/1_Prepare_urban_environments/ S2_Dep_urban_env.py`
+3) Attribution d’un type d’environnement urbain à chaque morceau de commune (un morceau de commune = intersection CLC et de la commune) → Lancer **S2_Dep_urban_env.py** `python3 /home/manon/Documents/Scripts_OSRM/1_Prepare_urban_environments/ S2_Dep_urban_env.py`
 
 En sortie : *env_geo_updated.gpkg* → fichier vectoriel contenant les environnements urbains à l’échelle de la France entière
 
@@ -37,7 +37,7 @@ Le dossier comprend aussi les éléments suivants :
 
 
 ## 2 - Construction du calculateur d’itinéraires avec OSRM (2_Construst_OSRM)
-Lancer la commande `python3 /home/manon/Documents/Scripts/2_Construct_OSRM/Construction_OSRM_AZ.py`
+Lancer la commande `python3 /home/manon/Documents/Scripts_OSRM/2_Construct_OSRM/Construction_OSRM_AZ.py`
 
 
 Il faudra créer ces dossier : 
@@ -74,7 +74,7 @@ Sorties :
 - Document texte recensant le temps d’exécution des différentes étapes (dans results/)
 
 ## 3 - Mise en route d’OSRM (3_Run_OSRM)
-Lancer la commande `python3 ./Scripts/3_Run_OSRM/Run_OSRM.py`
+Lancer la commande `python3 ./Scripts_OSRM/3_Run_OSRM/Run_OSRM.py`
 
 Le script met en route le back-end d’OSRM. 
 Paramètres du script :
