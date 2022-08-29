@@ -46,12 +46,14 @@ Le dossier comprend les éléments suivants :
   + utils.py : classe Timer avec méthodes permettant de démarrer un compteur et de l’arrêter en enregistrant la durée calculée dans un document texte.
   + **S1_Creation_BDD.py** : définit la fonction create_db qui permet la création de la base de données postgresql avec les extensions nécessaires (hstore et postgis).
   + **S2_Configuration_vitesses.py** : change_maxspeeds permet d’attribuer un environnement urbain à chaque tronçon OSM et une vitesse définie en conséquence. Le type d’environnement attribué est celui que le tronçon parcourt le plus au total. Pour ce faire, le script SQL change_maxspeeds.sql présent dans le même dossier est lancé. 
-          En entrée : le fichier pbf à modifier (stocké dans assets)
-          En sortie : le fichier pbf modifié (stocké dans results)
+          En entrée : le fichier pbf à modifier (stocké dans assets/)
+          En sortie : le fichier pbf modifié (stocké dans results/)
   + **S3_Construction_OSRM.py** : le réseau est construit à partir des données OSM précédemment modifiées et selon l’algorithme spécifié (MLD ou CH)
     + En entrée : le fichier pbf modifié (stocké dans results), le profil lua (car_updated1 dans notre cas, stocké dans assets mais en réalité dans le dossier dédié à OSRM créé lors de son installation)
     + En sortie : tous les fichiers nécessaires au lancement du serveur OSRM. Ils sont stockés dans le dossier results
-- assets/ : les données en entrée env_geo_updated.gpkg et le fichier pbf initial (téléchargé dans le script si non présent)
+
+Il faudra créer ces dossier : 
+- assets/ : dossier stockant les données en entrée *env_geo_updated.gpkg* et le fichier pbf initial (téléchargé dans le script si non présent)
 - results/ : dossier stockant les fichier obtenus en sortie  
 
 
