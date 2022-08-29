@@ -1,5 +1,5 @@
 # OPTIONS
-env_geo = 'env_geo_updated_v1'
+env_geo = 'env_geo_updated'
 network = 'hautes_pyrenees-latest' # 'france_metro_dom_com_nc-latest'
 url_network = http://download.openstreetmap.fr/extracts/merge/${network}.osm.pbf # changer l'url si autre réseau
 profile = 'car_updated1'
