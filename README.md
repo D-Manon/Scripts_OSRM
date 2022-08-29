@@ -2,7 +2,7 @@
 
 Cet ensemble de dossiers et de scripts permet de mettre en place un **calculateur d’itinéraires fonctionnant avec OSRM** et dont les vitesses sont configurées de manière à prendre en compte **l’environnement urbain traversé** par les tronçons de route. Cette prise en compte de l’environnement urbain s’appuie sur la méthodologie développée par l’unité CESAER de l’INRA Dijon pour le logiciel Odomatrix. Il s’agit de prendre en considération les ralentissements aux abords des zones urbaines très denses dus à l’important flux de circulation.
 
-Mohamed Hilal. ODOMATRIX. Calcul de distances routières intercommunales. Cahier des Techniques de l'INRA, INRA, 2010, pp.41-63. ⟨hal-02666703⟩ 
+Source : Mohamed Hilal. ODOMATRIX. Calcul de distances routières intercommunales. Cahier des Techniques de l'INRA, INRA, 2010, pp.41-63. ⟨hal-02666703⟩ 
 
 Avant de lancer les scripts, il faut au préalable avoir téléchargé le **back-end d’OSRM**. Mise en place détaillée ici : install/osrm.md 
 [https://github.com/D-Manon/Scripts_OSRM/blob/71cf2a593470b13fb3be2c8dc8165775eacf2f44/install/osrm.md]
