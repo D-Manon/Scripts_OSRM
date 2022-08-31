@@ -1,16 +1,14 @@
-'''
+"""
 Met en route le calculateur d'itinéraires
 - network : nom du fichier réseau pbf, sans l'extension
-- profile : nom du profil à utiliser, sans l'extension, ie car, foot, bicycle ou car_updated1
 - algorithm : algorithme du plus court chemin ie CH ou MLD
-'''
+"""
 
 import os
 from env import EnvVar
 
-def run_osrm(network, profile, algorithm) :
-    pth_main_folder = EnvVar.paths['pth_main_folder']
-        
+
+def run_osrm(network, algorithm):
     pth_results_network = EnvVar.paths['pth_results_network']
     
     if algorithm == "ch":
@@ -23,13 +21,13 @@ def run_osrm(network, profile, algorithm) :
         
     else:
         print("Entrer l'algorithme du plus court chemin 'MLD' ou 'CH' comme troisième argument")
-        
+
+
 def main():
     try:
         network = EnvVar.options['network']
-        profile = EnvVar.options['profile']
         algorithm = EnvVar.options['algorithm'].lower()
-        run_osrm(network, profile, algorithm)
+        run_osrm(network, algorithm)
     except Exception as exception:
         print(f"{type(exception).__name__} at line {exception.__traceback__.tb_lineno} of {__file__}: {exception}")
 
