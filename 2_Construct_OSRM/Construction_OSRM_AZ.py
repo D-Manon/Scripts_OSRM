@@ -68,32 +68,32 @@ def main(env_geo, network, profile, algorithm):
         # 1 - Création BDD PostgreSQL
         t.start()
         create_db(db_name, db_password, pth_osmosis_scripts)
-        t.stop_write_close('1. Création BDD', pth_folder_results)
+        t.stop_write_close('1. Création BDD PostgreSQL', pth_folder_results)
         
         # 2 - Téléchargement des données OSM si elles ne sont pas déjà téléchargées
         t.start()
         os.system(f"wget -P {pth_folder_data} {url_network}") if not os.path.isfile(f"{pth_folder_data}{network}.osm.pbf") else print(f"Le fichier {network}.osm.pbf a déjà été téléchargé")
-        t.stop_write_close('2. Téléchargement des données OSM', pth_folder_results)
+        t.stop_write_close('2. Téléchargement des données OSM si elles ne sont pas déjà téléchargées', pth_folder_results)
         
         # 3 - Sélection de types spécifiques d'highways
         t.start()
         os.system(f"{pth_osmosis} --read-pbf {pth_folder_data}{network}.osm.pbf --tf accept-ways highway=motorway,trunk,primary,secondary,tertiary,unclassified,residential,motorway_link,trunk_link,primary_link,secondary_link,tertiary_link,road,unclassified --used-node --write-pbf {pth_results_network}{network}_highways.osm.pbf")
         t.stop_write_close("3. Sélection de types spécifiques d'highways", pth_folder_results)       
         
-        # 4 - Chargement des données OSM dans la BDD PostgreSQL
+        # 4 - Chargement des données OSM sélectionnées dans la BDD
         t.start()
         os.system(f"{pth_osmosis} --read-pbf {pth_results_network}{network}_highways.osm.pbf --log-progress --write-pgsql database={db_name} user={db_user} password={db_password}")
-        t.stop_write_close('4. Chargement des données OSM dans la BDD PostgreSQL', pth_folder_results)         
+        t.stop_write_close('4. Chargement des données OSM sélectionnées dans la BDD', pth_folder_results)         
         
         # 5 - Attribution des vitesses selon l'environnement urbain
         t.start()
         change_maxspeeds(db_name, db_password, env_geo, pth_folder_data, pth_scripts)
         t.stop_write_close("5. Attribution des vitesses selon l'environnement urbain", pth_folder_results) 
         
-        # 6 - Exportation depuis la BDD PostgreSQL des données OSM modifiées
+        # 6 - Exportation depuis la BDD des données OSM modifiées
         t.start()
         os.system(f"{pth_osmosis} --read-pgsql host={db_host} database={db_name} user={db_user} password={db_password} --dataset-dump --write-pbf {pth_results_network}{network}_updated.osm.pbf")
-        t.stop_write_close('6. Exportation depuis la BDD PostgreSQL des données OSM modifiées', pth_folder_results)
+        t.stop_write_close('6. Exportation depuis la BDD des données OSM modifiées', pth_folder_results)
 
         ## CREATION RESEAU
         # 7 - Construction du réseau OSRM
