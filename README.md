@@ -1,12 +1,8 @@
 # Scripts_OSRM
 
-Cet ensemble de dossiers et de scripts permet de mettre en place un **calculateur d’itinéraires fonctionnant avec OSRM** et dont les vitesses sont configurées de manière à prendre en compte **l’environnement urbain traversé** par les tronçons de route. Cette prise en compte de l’environnement urbain s’appuie sur la méthodologie développée par l’unité CESAER de l’INRA Dijon pour le logiciel Odomatrix. Il s’agit de prendre en considération les ralentissements aux abords des zones urbaines très denses dus à l’important flux de circulation.
+Cet ensemble de dossiers et de scripts permet de mettre en place sur **Linux** un **calculateur d’itinéraires fonctionnant avec OSRM** et dont les vitesses sont configurées de manière à prendre en compte **l’environnement urbain traversé** par les tronçons de route. Cette prise en compte de l’environnement urbain s’appuie sur la méthodologie développée par l’unité CESAER de l’INRA Dijon pour le logiciel Odomatrix. Il s’agit de prendre en considération les ralentissements aux abords des zones urbaines très denses dus à l’important flux de circulation.
 
 *Source : Mohamed Hilal. ODOMATRIX. Calcul de distances routières intercommunales. Cahier des Techniques de l'INRA, INRA, 2010, pp.41-63. ⟨hal-02666703⟩* 
-
-Avant de lancer les scripts, il faut au préalable avoir téléchargé le **back-end d’OSRM**. Mise en place détaillée ici : install/osrm.md 
-[https://github.com/D-Manon/Scripts_OSRM/blob/71cf2a593470b13fb3be2c8dc8165775eacf2f44/install/osrm.md]
-
 
 Les dossiers listés ci-dessous contiennent un ou plusieurs scripts python permettant de réaliser les opérations suivantes :
 - **1_Prepare_urban_environments** : Définition de types d’environnements urbains à partir des données INSEE et du Corine Land Cover (méthodologie basée sur celle appliquée par l’INRA Dijon). En sortie de ce script, on obtient un fichier vectoriel au format gpkg.
@@ -14,7 +10,13 @@ Les dossiers listés ci-dessous contiennent un ou plusieurs scripts python perme
 - **3_Run_OSRM** : Mise en route du serveur OSRM
 - **4_Calculate_distances_OSRM** : Calcul automatisé de plusieurs distances avec le serveur OSRM mis en route à partir d’un fichier csv comprenant des coordonnées. En sortie, on obtient un fichier csv avec tous les temps de trajet calculés.
 
-Rq :
+## Pré-requis 
+Avant de lancer les scripts, il faut au préalable avoir téléchargé :
+- le **back-end d’OSRM**. Mise en place détaillée ici : install/osrm.md 
+[https://github.com/D-Manon/Scripts_OSRM/blob/71cf2a593470b13fb3be2c8dc8165775eacf2f44/install/osrm.md]
+- **ogr2ogr** pour convertir le fichier vectoriel des environnements urbains en un format exploitable avec PostgreSQL
+- **osmosis** pour la manipulation des données OSM
+
 Le fichier *env* est à renommer en *.env*  
 Il rassemble les variables nécessaires au fonctionnement des scripts. Celles-ci peuvent être modifiées pour ajuster les chemins d'accès et pour configurer les paramètres souhaités.
 
