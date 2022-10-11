@@ -17,6 +17,8 @@ Avant de lancer les scripts, il faut au préalable avoir téléchargé :
 - **ogr2ogr** pour convertir le fichier vectoriel des environnements urbains en un format exploitable avec PostgreSQL
 - **osmosis** pour la manipulation des données OSM
 
+Le fichier *requirements.txt* contient la liste des packages Python nécessaires au projet avec les versions utilisées.
+
 Le fichier *env* est à renommer en *.env*  
 Il rassemble les variables nécessaires au fonctionnement des scripts. Celles-ci peuvent être modifiées pour ajuster les chemins d'accès et pour configurer les paramètres souhaités.
 
