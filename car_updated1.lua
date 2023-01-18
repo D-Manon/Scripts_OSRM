@@ -10,6 +10,7 @@ find_access_tag = require("lib/access").find_access_tag
 limit = require("lib/maxspeed").limit
 Utils = require("lib/utils")
 Measure = require("lib/measure")
+Startpoint_secure = require('lib/startpoint_secure')
 
 function setup()
   return {
@@ -116,14 +117,15 @@ function setup()
     },
 
     classes = Sequence {
-        'toll', 'motorway', 'ferry', 'restricted', 'tunnel'
+        'toll', 'motorway', 'ferry', 'restricted', 'tunnel', 'airway'
     },
 
     -- classes to support for exclude flags
     excludable = Sequence {
         Set {'toll'},
         Set {'motorway'},
-        Set {'ferry'}
+        Set {'ferry'}, 
+        Set {'airway'}
     },
 
     avoid = Set {
@@ -152,7 +154,8 @@ function setup()
         unclassified    = 25,
         residential     = 25,
         living_street   = 10,
-        service         = 15
+        service         = 15,
+        airway = 300
       }
     },
 
@@ -179,7 +182,8 @@ function setup()
       'residential',
       'living_street',
       'unclassified',
-      'service'
+      'service',
+      'airway'
     },
 
     construction_whitelist = Set {
@@ -364,6 +368,12 @@ function process_node(profile, node, result, relations)
   if "traffic_signals" == tag then
     result.traffic_lights = true
   end
+  
+    -- check if node is a airport
+  --local tag = node:get_value_by_key("highway")
+  --if "airport" == tag then
+    --result.traffic_airport = true
+  --end
 end
 
 function process_way(profile, way, result, relations)
@@ -445,7 +455,8 @@ function process_way(profile, way, result, relations)
 
     -- handle various other flags
     WayHandlers.roundabouts,
-    WayHandlers.startpoint,
+    Startpoint_secure.startpoint_secure, -- https://github.com/Project-OSRM/osrm-profiles-contrib/blob/master/5/18/does_not_starts_or_ends_in_the_midst_of_motorway_or_tunnel/lib/startpoint_secure.lua
+    --WayHandlers.startpoint,
     WayHandlers.driving_side,
 
     -- set name, ref and pronunciation
