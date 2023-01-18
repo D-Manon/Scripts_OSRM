@@ -17,6 +17,7 @@ import os
 import src.utils as Timer
 from src.S1_Creation_BDD import create_db
 from src.S2_Configuration_vitesses import change_maxspeeds
+from src.Ajout_avions import add_airways
 from src.S3_Construction_OSRM import construct_osrm
 from src.env import EnvVar
 
@@ -65,41 +66,46 @@ def main(env_geo, network, profile, algorithm):
         t=Timer.Timer()
 
         ## PREPARATION DES DONNEES
-        # 1 - Création BDD PostgreSQL
+        # 1 - Création BDD
         t.start()
         create_db(db_name, db_password, pth_osmosis_scripts)
-        t.stop_write_close('1. Création BDD PostgreSQL', pth_folder_results)
+        t.stop_write_close('1. Création BDD', pth_folder_results)
         
         # 2 - Téléchargement des données OSM si elles ne sont pas déjà téléchargées
         t.start()
         os.system(f"wget -P {pth_folder_data} {url_network}") if not os.path.isfile(f"{pth_folder_data}{network}.osm.pbf") else print(f"Le fichier {network}.osm.pbf a déjà été téléchargé")
-        t.stop_write_close('2. Téléchargement des données OSM si elles ne sont pas déjà téléchargées', pth_folder_results)
+        t.stop_write_close('2. Téléchargement des données OSM', pth_folder_results)
         
-        # 3 - Sélection de types spécifiques d'highways
+        # 3 - Sélection et extraction des highways des données OSM
         t.start()
         os.system(f"{pth_osmosis} --read-pbf {pth_folder_data}{network}.osm.pbf --tf accept-ways highway=motorway,trunk,primary,secondary,tertiary,unclassified,residential,motorway_link,trunk_link,primary_link,secondary_link,tertiary_link,road,unclassified --used-node --write-pbf {pth_results_network}{network}_highways.osm.pbf")
-        t.stop_write_close("3. Sélection de types spécifiques d'highways", pth_folder_results)       
+        t.stop_write_close('3. Extraction des highways', pth_folder_results)       
         
-        # 4 - Chargement des données OSM sélectionnées dans la BDD
+        # 4 - Chargement des highways dans postgis
         t.start()
         os.system(f"{pth_osmosis} --read-pbf {pth_results_network}{network}_highways.osm.pbf --log-progress --write-pgsql database={db_name} user={db_user} password={db_password}")
-        t.stop_write_close('4. Chargement des données OSM sélectionnées dans la BDD', pth_folder_results)         
+        t.stop_write_close('4. Chargement des highways dans postgis', pth_folder_results)         
         
         # 5 - Attribution des vitesses selon l'environnement urbain
         t.start()
         change_maxspeeds(db_name, db_password, env_geo, pth_folder_data, pth_scripts)
         t.stop_write_close("5. Attribution des vitesses selon l'environnement urbain", pth_folder_results) 
         
-        # 6 - Exportation depuis la BDD des données OSM modifiées
+        # 6 - Ajout de l'avion
+        t.start()
+        add_airways(db_name, db_password)
+        t.stop_write_close("6. Ajout de l'avion", pth_folder_results) 
+        
+        # 7 - Exportation des highways modifiés depuis postgis
         t.start()
         os.system(f"{pth_osmosis} --read-pgsql host={db_host} database={db_name} user={db_user} password={db_password} --dataset-dump --write-pbf {pth_results_network}{network}_updated.osm.pbf")
-        t.stop_write_close('6. Exportation depuis la BDD des données OSM modifiées', pth_folder_results)
+        t.stop_write_close('7. Exportation des highways modifiés depuis postgis', pth_folder_results)
 
         ## CREATION RESEAU
-        # 7 - Construction du réseau OSRM
+        # 8 - Construction du réseau OSRM
         t.start()
         construct_osrm(f"{network}_updated", profile, algorithm, pth_osrm_build, pth_osrm_profiles, pth_folder_results, pth_results_network)
-        t.stop_write_close("7. Construction du réseau OSRM", pth_folder_results)
+        t.stop_write_close("8. Construction du réseau OSRM", pth_folder_results)
         
     except Exception as exception:
         print(f"{type(exception).__name__} at line {exception.__traceback__.tb_lineno} of {__file__}: {exception}")
