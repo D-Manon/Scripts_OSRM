@@ -455,7 +455,7 @@ function process_way(profile, way, result, relations)
 
     -- handle various other flags
     WayHandlers.roundabouts,
-    Startpoint_secure.startpoint_secure, -- https://github.com/Project-OSRM/osrm-profiles-contrib/blob/master/5/18/does_not_starts_or_ends_in_the_midst_of_motorway_or_tunnel/lib/startpoint_secure.lua
+    Startpoint_secure.startpoint_secure, -- avoid wrong startpoints : https://github.com/Project-OSRM/osrm-profiles-contrib/blob/master/5/18/does_not_starts_or_ends_in_the_midst_of_motorway_or_tunnel/lib/startpoint_secure.lua
     --WayHandlers.startpoint,
     WayHandlers.driving_side,
 
